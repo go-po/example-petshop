@@ -1,3 +1,14 @@
+SWAGGER=docker run --rm -it -e GOPATH=${HOME}/go:/go -v ${HOME}:${HOME} -w $(shell pwd) quay.io/goswagger/swagger
+
+stuff:
+	$(SWAGGER) generate server --help
+
+gen-server:
+	$(SWAGGER) generate server 	-f ./api/petstore.yaml \
+							  	-t generated/server \
+  								--exclude-spec \
+  								--exclude-main \
+							  	-A "Example Petstore"
 
 db-reset:
 	echo "drop schema public cascade" 			| docker exec -i petstore_pg psql -U petstore po
