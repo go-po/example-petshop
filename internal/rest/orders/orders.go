@@ -17,6 +17,8 @@ type App interface {
 func Register(api *operations.ExamplePetstoreAPI, app App) {
 	api.StorePlaceOrderHandler = placeOrder(app)
 	api.StoreGetOrderByIDHandler = getOrdersById(app)
+	api.StoreDeleteOrderHandler = deleteOrder(app)
+	api.StoreGetInventoryHandler = getInventory(app)
 }
 
 func placeOrder(app App) store.PlaceOrderHandlerFunc {
@@ -44,5 +46,17 @@ func placeOrder(app App) store.PlaceOrderHandlerFunc {
 func getOrdersById(app App) store.GetOrderByIDHandlerFunc {
 	return func(params store.GetOrderByIDParams) middleware.Responder {
 		return store.NewGetOrderByIDBadRequest()
+	}
+}
+
+func deleteOrder(app App) store.DeleteOrderHandlerFunc {
+	return func(params store.DeleteOrderParams) middleware.Responder {
+		return store.NewDeleteOrderBadRequest()
+	}
+}
+
+func getInventory(app App) store.GetInventoryHandlerFunc {
+	return func(params store.GetInventoryParams, principle interface{}) middleware.Responder {
+		return store.NewGetInventoryOK().WithPayload(nil)
 	}
 }
