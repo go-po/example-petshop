@@ -1,0 +1,21 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:11.5
+    container_name: petstore_pg
+    ports:
+      - "5429:5432"
+    environment:
+      POSTGRES_USER: petstore
+      POSTGRES_PASSWORD: petstore
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    container_name: petstore_mq
+    ports:
+      - "5669:5672"
+      - "15669:15672"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: petstore
+      RABBITMQ_DEFAULT_USER: petstore
+      RABBITMQ_DEFAULT_PASS: petstore
+      RABBITMQ_DEFAULT_VHOST: /
