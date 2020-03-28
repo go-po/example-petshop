@@ -6,12 +6,13 @@ import (
 	"github.com/go-po/example-petstore/generated/server/restapi/operations"
 	"github.com/go-po/example-petstore/internal/rest/orders"
 	"github.com/go-po/example-petstore/internal/rest/pets"
+	"github.com/go-po/example-petstore/internal/rest/users"
 	"github.com/jessevdk/go-flags"
 	"log"
 	"os"
 )
 
-func New(ordersApp orders.App, petsApp pets.App) (*restapi.Server, error) {
+func New(ordersApp orders.App, petsApp pets.App, usersApp users.App) (*restapi.Server, error) {
 	swaggerSpec, err := loads.Embedded(restapi.SwaggerJSON, restapi.FlatSwaggerJSON)
 	if err != nil {
 		log.Fatalln(err)
@@ -21,6 +22,7 @@ func New(ordersApp orders.App, petsApp pets.App) (*restapi.Server, error) {
 
 	orders.Register(api, ordersApp)
 	pets.Register(api, petsApp)
+	users.Register(api, usersApp)
 
 	server := restapi.NewServer(api)
 

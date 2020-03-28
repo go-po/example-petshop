@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/go-po/example-petstore/internal/domain/orders"
 	"github.com/go-po/example-petstore/internal/domain/pets"
+	"github.com/go-po/example-petstore/internal/domain/users"
 	"github.com/go-po/example-petstore/internal/rest"
 	"github.com/go-po/po"
 	"log"
@@ -28,7 +29,12 @@ func main() {
 		log.Fatalf("pets app: %s", err)
 	}
 
-	server, err := rest.New(ordersApp, petsApp)
+	usersApp, err := users.New(es)
+	if err != nil {
+		log.Fatalf("users app: %s", err)
+	}
+
+	server, err := rest.New(ordersApp, petsApp, usersApp)
 	if err != nil {
 		log.Fatalf("rest serverr: %s", err)
 	}
