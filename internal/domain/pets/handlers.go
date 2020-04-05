@@ -3,18 +3,18 @@ package pets
 import (
 	"context"
 	"github.com/go-po/po"
-	"github.com/go-po/po/stream"
+	"github.com/go-po/po/streams"
 )
 
 type AddPetHandler struct {
 	es EventStore
 }
 
-func (h *AddPetHandler) Handle(ctx context.Context, msg stream.Message) error {
+func (h *AddPetHandler) Handle(ctx context.Context, msg streams.Message) error {
 	streamId := StreamPets.WithEntity("%d", msg.Number)
 	switch cmd := msg.Data.(type) {
 	case AddPetCmd:
-		return addPet(h.es.Stream(ctx, streamId.String()), cmd)
+		return addPet(h.es.Stream(ctx, streamId), cmd)
 	default:
 		// ignore
 	}
@@ -22,12 +22,6 @@ func (h *AddPetHandler) Handle(ctx context.Context, msg stream.Message) error {
 }
 
 func addPet(petStream *po.Stream, cmd AddPetCmd) error {
-	tx, err := petStream.Begin()
-	if err != nil {
-		return err
-	}
-	defer tx.Rollback()
-
 	pos, err := petStream.Size()
 	if err != nil {
 		return err
@@ -36,10 +30,9 @@ func addPet(petStream *po.Stream, cmd AddPetCmd) error {
 		// already handled
 		return nil
 	}
-	petStream.AppendTx(tx, Added{
+	_, err = petStream.Append(Added{
 		Name: cmd.Name,
 		Tags: cmd.Tags,
 	})
-	_, err = tx.Commit()
 	return err
 }

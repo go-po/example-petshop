@@ -2,7 +2,7 @@ package pets
 
 import (
 	"context"
-	"github.com/go-po/po/stream"
+	"github.com/go-po/po/streams"
 )
 
 type Pet struct {
@@ -11,23 +11,10 @@ type Pet struct {
 	Name string
 }
 
-func (pet *Pet) Handle(ctx context.Context, msg stream.Message) error {
+func (pet *Pet) Handle(ctx context.Context, msg streams.Message) error {
 	switch event := msg.Data.(type) {
 	case Added:
 		pet.Name = event.Name
-	default:
-	}
-	return nil
-}
-
-type DeletedView struct {
-	Deleted bool
-}
-
-func (view *DeletedView) Handle(ctx context.Context, msg stream.Message) error {
-	switch msg.Data.(type) {
-	case Deleted:
-		view.Deleted = true
 	default:
 	}
 	return nil
