@@ -1,12 +1,13 @@
 package main
 
 import (
+	"log"
+
 	"github.com/go-po/example-petstore/generated/petstore"
 	"github.com/go-po/example-petstore/internal/domain/pets"
 	"github.com/go-po/example-petstore/internal/rest"
 	"github.com/go-po/po"
 	"github.com/labstack/echo/v4"
-	"log"
 )
 
 func main() {

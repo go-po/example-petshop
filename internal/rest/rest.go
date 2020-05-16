@@ -3,6 +3,7 @@ package rest
 import (
 	"context"
 	"encoding/json"
+
 	"github.com/go-po/example-petstore/generated/petstore"
 	"github.com/go-po/example-petstore/internal/domain/pets"
 	"github.com/labstack/echo/v4"
