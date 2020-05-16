@@ -14,11 +14,12 @@ require (
 	github.com/go-openapi/strfmt v0.19.5 // indirect
 	github.com/go-openapi/swag v0.19.8 // indirect
 	github.com/go-openapi/validate v0.19.3 // indirect
-	github.com/go-po/po v0.4.0
-	github.com/golang-migrate/migrate/v4 v4.10.0 // indirect
+	github.com/go-po/po v0.5.0
+	github.com/golang-migrate/migrate/v4 v4.11.0 // indirect
 	github.com/jessevdk/go-flags v1.4.0 // indirect
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/echo/v4 v4.1.15
+	github.com/lib/pq v1.5.2 // indirect
 	github.com/mailru/easyjson v0.7.1 // indirect
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/mattn/go-shellwords v1.0.10 // indirect
@@ -29,4 +30,3 @@ require (
 	golang.org/x/sys v0.0.0-20200327173247-9dae0f8f5775 // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect
 )
-
